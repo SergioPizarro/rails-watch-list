@@ -1,0 +1,23 @@
+<h1>Movie with that is indexed with the list</h1>
+
+<h2>Bookmark create comment and a rating</h2>
+
+<h3> <%= link_to "Come back to the homepage", root_path%> </h3>
+
+
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+  <li> <%= bookmark.movie.title %> </li>
+    <li><%= bookmark.comment %></li>
+    <li>
+    <%= link_to "DELETE", bookmark_path(bookmark),
+    data: {turbo_method: :delete, turbo_confirm: "are you sure????"}%>
+    </li>
+  <% end %>
+</ul>
+
+<%= simple_form_for([@list, @bookmark]) do |f| %>
+  <%= f.association :movie %>
+  <%= f.input :comment %>
+  <%= f.submit %>
+<% end %>
